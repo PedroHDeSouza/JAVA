@@ -4,7 +4,7 @@ public class miniATMmetodos {
         double saldo = 1000;
 
         saldo = depositar(saldo, 500);
-        saldo = sacar(saldo,);
+        saldo = sacar(saldo,200);
 
         System.out.println(saldo);
 
