@@ -1,19 +1,26 @@
 public class miniATMmetodos {
     public static void main(String[] args){
-        MostrarMenu();
-        sacar();
-        depoistar();
+
+        double saldo = 1000;
+
+        saldo = depositar(saldo, 500);
+        saldo = sacar(saldo,);
+
+        System.out.println(saldo);
+
     }
 
-    public static void MostrarMenu{
-        System.out.println("ola");
+
+    public static double depositar(double saldo, double valor){
+        return saldo + valor;
     }
 
     public static double sacar(double saldo, double valor){
-        System.out.println("ola");
-    }
-
-    public static double depositar(double saldo, double valor){
-        System.out.println("ola");
+        if (saldo > 0 && valor <= saldo){
+            return saldo - valor;
+        }else {
+            System.out.println("saque invalido");
+            return saldo;
+        }
     }
 }
