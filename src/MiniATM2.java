@@ -14,38 +14,39 @@ public class MiniATM2 {
             MostrarMenu();
             opcao = scanner.nextInt();
 
+            switch (opcao) {
+                //SALDO
+                case 1:
+                    System.out.println("este é seu saldo atual: " + saldo);
+                    break;
 
-            //SALDO
-            if(opcao == 1){
-                System.out.println("este é seu saldo atual: "+ saldo);
+                //SACAR
+                case 2:
+                    double valorSaque = 0;
+                    System.out.println("quanto voce quer sacar: ");
+                    valorSaque = scanner.nextDouble();
+                    saldo = sacar(saldo, valorSaque);
+                    System.out.println(saldo);
+                    break;
+
+                //DEPOSITO
+                case 3:
+                    double valorDeposito = 0;
+                    System.out.println("quanto voce quer depositar: ");
+                    valorDeposito = scanner.nextDouble();
+
+                    saldo = depositar(saldo, valorDeposito);
+                    System.out.println(saldo);
+                    break;
+
+                case 4:
+                    System.out.println("Saindo do banco");
+                    break;
+
+                default:
+                    System.out.println("opçao invalida");
             }
-
-            //SACAR
-            if(opcao == 2){
-                double valor = 0;
-                System.out.println("quanto voce quer sacar: ");
-                valor = scanner.nextInt();
-                saldo = sacar(saldo,valor);
-                System.out.println(saldo);
-            }
-
-            //DEPOSITO
-            if(opcao == 3){
-                double valor = 0;
-                System.out.println("quanto voce quer depositar: ");
-                valor = scanner.nextInt();
-
-                saldo = depositar(saldo,valor);
-                System.out.println(saldo);
-            }
-
-            if (opcao > 4 || opcao <= 0){
-                System.out.println("opçao invalida");
-            }
-
         }
-
-
     }
 
     public static void MostrarMenu(){
@@ -61,21 +62,30 @@ public class MiniATM2 {
 
     }
 
+    public static boolean podeDepositar(double valor){
+        return valor > 0;
+    }
+
+    public static boolean podeSacar(double saldo, double valor){
+        return valor > 0 && valor <= saldo;
+    }
+
     public static double sacar(double saldo, double valor){
-        if(saldo > 0 && valor <= saldo){
+        if (podeSacar(saldo,valor)){
+            System.out.println("Saque aprovado");
             return saldo - valor;
         }else{
-            System.out.println("saque invalido");
+            System.out.println("Saque recusado");
             return saldo;
         }
     }
 
     public static double depositar(double saldo, double valor){
-        if (valor > 0){
-            saldo = saldo + valor;
-            return saldo;
-        }else {
-            System.out.println("Voce nao pode colocar saldo negativo");
+        if (podeDepositar(valor)){
+            System.out.println("deposito aprovado!");
+            return saldo + valor;
+        }else{
+            System.out.println("Deposito recusado");
             return saldo;
         }
     }
