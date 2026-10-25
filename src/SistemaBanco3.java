@@ -11,17 +11,12 @@ public class SistemaBanco3 {
         double deposito = 0;
         int opcao = -1;
         boolean cadastroRealizado = false;
+        double saque = 0;
 
 
         while(opcao != 0){
 
-            System.out.println("===BANCO 2.0===");
-            System.out.println("1 - Cadastrar conta");
-            System.out.println("2 - Consultar conta");
-            System.out.println("3 - Depositar");
-            System.out.println("4 - Sacar");
-            System.out.println("5 - Listar contas (opçao dev)");
-            System.out.println("0 - Sair");
+            mostrarMenu();
 
             System.out.println("Escolha: ");
             opcao = sc.nextInt();
@@ -83,6 +78,7 @@ public class SistemaBanco3 {
                     }
                     break;
 
+                //DEPOSITO
                 case 3:
                     if(cadastroRealizado) {
                         System.out.println("Deposito selecionado!");
@@ -96,14 +92,14 @@ public class SistemaBanco3 {
                                 if (buscaConta == contas[i]) {
                                     encontrou = true;
 
-                                    System.out.println("Seu saldo atual é: " + saldos[i]);
+                                    mostrarSaldo(saldos[i]);
 
                                     System.out.println("qual o valor do deposito:");
                                     deposito = sc.nextDouble();
 
                                     if (deposito > 0) {
-                                        saldos[i] = saldos[i] + deposito;
-                                        System.out.println("Seu saldo atual é: " + saldos[i]);
+                                        saldos[i] = calcularDeposito(saldos[i], deposito);
+                                        mostrarSaldo(saldos[i]);
                                     } else {
                                         System.out.println("Valor de deposito invalido!");
                                     }
@@ -117,8 +113,36 @@ public class SistemaBanco3 {
                     }
                     break;
 
+                //SAQUE
                 case 4:
-                    System.out.println("Saque selecionado!");
+                    if(cadastroRealizado) {
+                        System.out.println("Saque selecionado!");
+
+                        System.out.println("digite o numero da sua conta: ");
+                        int buscaConta = sc.nextInt();
+
+                        boolean encontrou = false;
+
+                            for (int i = 0; i < contas.length; i++) {
+                                if (buscaConta == contas[i]) {
+                                    encontrou = true;
+
+                                    mostrarSaldo(saldos[i]);
+
+                                    System.out.println("Qual o valor do saque?");
+                                    saque = sc.nextDouble();
+
+                                    saldos[i] = calcularSaque(saldos[i], saque);
+
+                                    mostrarSaldo(saldos[i]);
+                                }
+                            }
+                            if(!encontrou){
+                                System.out.println("Conta nao encontrada");
+                            }
+                    }else{
+                        System.out.println("Nao existem contas cadastradas!");
+                    }
                     break;
 
                 case 5:
@@ -143,8 +167,31 @@ public class SistemaBanco3 {
                     System.out.println("Opçao invalida! Digite uma das opçoes");
             }
         }
+    }
+    public static void mostrarMenu() {
+        System.out.println("=== BANCO 2.0 ===");
+        System.out.println("1 - Cadastrar conta");
+        System.out.println("2 - Consultar conta");
+        System.out.println("3 - Depositar");
+        System.out.println("4 - Sacar");
+        System.out.println("5 - Listar contas");
+        System.out.println("0 - Sair");
+    }
 
+    public static void mostrarSaldo(double saldo){
+        System.out.println("Seu saldo atual é : "+saldo);
+    }
 
+    public static double calcularDeposito(double saldo, double deposito){
+        return saldo + deposito;
+    }
 
+    public static double calcularSaque(double saldo, double saque) {
+        if (saque > 0 && saque <= saldo) {
+            return saldo - saque;
+        } else {
+            System.out.println("Saque inválido!");
+            return saldo;
+        }
     }
 }
