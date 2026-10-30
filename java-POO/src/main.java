@@ -1,22 +1,18 @@
 public class main {
     public static void main(String[] args) {
-        ContasBancarias conta1 = new ContasBancarias();
 
-        conta1.titular = "Pedro";
-        conta1.numeroConta = 1001;
-        conta1.saldo = 500;
+        cadastrarContas("Pedro", 100, 500);
 
-        ContasBancarias conta2 = new ContasBancarias();
+    }
 
-        conta2.titular = "venus";
-        conta2.numeroConta = 1002;
-        conta2.saldo = 1000;
-
-        conta1.pix(conta2, 200);
-
-        System.out.println(conta1.saldo);
-        System.out.println(conta2.saldo);
-
+    public static void cadastrarContas(String nome, int numeroconta, double saldo){
+        try{
+            ContasBancarias conta1 =
+                    new ContasBancarias(nome, numeroconta, saldo);
+            System.out.println("Conta Criada");
+        }catch (IllegalArgumentException e){
+            System.out.println("Erro: " + e.getMessage());
+        }
     }
 }
 
