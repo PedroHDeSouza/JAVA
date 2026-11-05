@@ -7,8 +7,7 @@ public class main {
         cadastrarContas(contas,"Pedro", 100, 500);
         cadastrarContas(contas, "Venus", 101, 500);
 
-        listarContas(contas);
-
+        buscarConta(contas, 100);
 
     }
 
@@ -38,6 +37,30 @@ public class main {
                 System.out.println(contas.get(i).getSaldo());
             }
         }
+    }
+
+    public static ContasBancarias buscarConta(
+            ArrayList<ContasBancarias> contas,
+            int numeroBusca){
+
+        boolean encontrou = false;
+
+        for(int i = 0; i < contas.size(); i++){
+            if (contas.get(i).getNumeroConta() == numeroBusca){
+                encontrou = true;
+
+                System.out.println(contas.get(i).getTitular());
+                System.out.println(contas.get(i).getSaldo());
+                System.out.println(contas.get(i).getNumeroConta());
+
+                return contas.get(i);
+            }
+        }
+
+        if(!encontrou){
+            System.out.println("Conta nao encontrada!");
+        }
+        return null;
     }
 }
 
