@@ -12,7 +12,6 @@ public class gerenciadorContas {
                 return contas.get(i);
             }
         }
-
         return null;
     }
 
