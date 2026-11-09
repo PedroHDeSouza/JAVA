@@ -3,25 +3,38 @@ public class ContasBancarias {
     private int numeroConta;
     private double saldo;
 
-    public void depositar(double valor) {
-        saldo += valor;
+    public boolean depositar(double valor) {
+        if(valor > 0){
+            saldo += valor;
+            return true;
+        }else{
+            return false;
+        }
     }
 
-    public void sacar(double valor){
+    public boolean sacar(double valor){
         if (valor > 0 && valor <= saldo){
             saldo -= valor;
+            return true;
         }else {
-            System.out.println("Saque invalido");
+            return false;
         }
     }
 
-    public void pix(ContasBancarias destino, double valor){
+    public boolean pix(ContasBancarias destino, double valor){
         if(valor > 0 && valor <= saldo){
-            sacar(valor);
-            destino.depositar(valor);
-        }else{
-            System.out.println("transferencia invalida");
+            boolean saqueRealizado = sacar(valor);
+            if(!saqueRealizado){
+                return false;
+            }
+            boolean depositoRealizado = destino.depositar(valor);
+            if(!depositoRealizado){
+                depositar(valor);
+                return false;
+            }
+            return true;
         }
+        return false;
     }
 
     public ContasBancarias(String nome, int numero, double saldoInicial) {

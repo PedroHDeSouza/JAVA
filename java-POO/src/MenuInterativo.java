@@ -5,6 +5,8 @@ public class MenuInterativo {
         System.out.println("2 - Buscar conta");
         System.out.println("3 - Listar conta");
         System.out.println("4 - Realizar pix");
+        System.out.println("5 - Deposito");
+        System.out.println("6 - Saque");
         System.out.println("0 - Sair");
     }
 }

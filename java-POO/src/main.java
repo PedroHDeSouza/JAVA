@@ -72,6 +72,58 @@ public class main {
 
                     break;
 
+                case 5:
+                    System.out.println("Deposito selecionado");
+                    System.out.println("Qual conta para deposito: ");
+                    int numeroContaDeposito = sc.nextInt();
+
+                    ContasBancarias contaDeposito = banco1.buscarContas(numeroContaDeposito);
+
+                    if (contaDeposito != null){
+
+                        System.out.println("Valor para deposito: ");
+                        double valorDeposito = sc.nextDouble();
+
+                        boolean depositoRealizado = contaDeposito.depositar(valorDeposito);
+
+                        if(depositoRealizado){
+                            System.out.println("Deposito realizado");
+                        }else{
+                            System.out.println("Deposito negado!");
+                        }
+
+                    }else{
+                        System.out.println("Conta nao encontrada");
+                    }
+                    break;
+
+                case 6:
+                    System.out.println("Saque selecionado");
+
+                    System.out.println("Qual a conta para o saque: ");
+                    int numeroContaSaque = sc.nextInt();
+
+                    ContasBancarias contaSaque = banco1.buscarContas(numeroContaSaque);
+
+
+                    if(contaSaque != null){
+
+                        System.out.println("Valor para saque: ");
+                        double valorSaque = sc.nextDouble();
+
+                        boolean saqueRealizado = contaSaque.sacar(valorSaque);
+
+                        if(saqueRealizado){
+                            System.out.println("Saque realizado");
+                        }else{
+                            System.out.println("Saque invalido!");
+                        }
+
+                    }else{
+                        System.out.println("Conta nao encontrada:");
+                    }
+                    break;
+
                 case 0:
                     System.out.println("Encerando sistema...");
                     break;
