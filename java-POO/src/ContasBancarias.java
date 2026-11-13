@@ -22,6 +22,9 @@ public class ContasBancarias {
     }
 
     public boolean pix(ContasBancarias destino, double valor){
+        if(destino == null || destino == this){
+            return false;
+        }
         if(valor > 0 && valor <= saldo){
             boolean saqueRealizado = sacar(valor);
             if(!saqueRealizado){

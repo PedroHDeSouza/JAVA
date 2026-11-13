@@ -52,20 +52,24 @@ public class gerenciadorContas {
         ContasBancarias origem = buscarContas(numOrigem);
         ContasBancarias destino = buscarContas(numDestino);
 
-        if(origem != null && destino != null) {
-            if (origem != destino) {
-                if (valor > 0 && origem.getSaldo() >= valor) {
-                    origem.pix(destino, valor);
-                    System.out.println("Seu pix foi realizado no valor : " + valor);
-                } else {
-                    System.out.println("PIX invalido! Verifique o valor e o saldo disponivel");
-                }
-            }else {
-                System.out.println("Nao pode fazer pix para a mesma conta");
-            }
-        }else{
-            System.out.println("Uma das contas nao encontrada");
-        }
+        if (origem != null && destino != null) {
 
+            if (origem != destino) {
+
+                boolean pixRealizado = origem.pix(destino, valor);
+
+                if (pixRealizado) {
+                    System.out.println("PIX realizado!");
+                } else {
+                    System.out.println("PIX não realizado!");
+                }
+
+            } else {
+                System.out.println("Não pode fazer PIX para a mesma conta!");
+            }
+
+        } else {
+            System.out.println("Uma das contas não foi encontrada!");
+        }
     }
 }
